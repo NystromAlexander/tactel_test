@@ -11,9 +11,9 @@ public class News {
     private String mTitle;
     private String mNewsUrl;
     private String mDescritption;
-    private Date mPublished;
+    private String mPublished;
 
-    public News(String title, String url, String descritption, Date published) {
+    public News(String title, String url, String descritption, String published) {
         mTitle = title;
         mNewsUrl = url;
         mDescritption = descritption;
@@ -33,7 +33,7 @@ public class News {
         return mDescritption;
     }
 
-    public Date getPublished() {
+    public String getPublished() {
         return mPublished;
     }
 }

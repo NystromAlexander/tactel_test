@@ -8,6 +8,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Array;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,41 +21,81 @@ public class Rss_parser {
 
     private static String TAG = "Rss_parser";
 
-    static List<News> parseRssStream(InputStream inputStream) {
+    public static List<News> parseRssStream(InputStream inputStream) throws XmlPullParserException, IOException {
         XmlPullParser parser = Xml.newPullParser();
-        try {
-            parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            parser.setInput(inputStream, null);
+        boolean retrieveData = false;
+        ArrayList<News> newsList = new ArrayList<>();
 
-            while (parser.next() != XmlPullParser.END_DOCUMENT) {
-                int eventType = parser.getEventType();
+         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+         parser.setInput(inputStream, null);
 
-                switch (eventType){
-                    case XmlPullParser.START_TAG:
+         String title = null;
+         String description = null;
+         String link = null;
+         String date = null;
 
-                        break;
+         while (parser.next() != XmlPullParser.END_DOCUMENT) {
+            int eventType = parser.getEventType();
 
-
-                    case XmlPullParser.END_TAG:
-
-                        break;
-
-                    case XmlPullParser.TEXT:
-
-                        break;
-                }
-
+            String name = parser.getName();
+            if (name == null) {
+                continue;
             }
 
-        } catch (XmlPullParserException e) {
-            Log.w(TAG, "Problem with parser: " +e.getMessage());
-        } catch (IOException e) {
-            Log.w(TAG, "Issue reading next tag: "+e.getMessage());
-        }
+            switch (eventType){
+                case XmlPullParser.START_TAG:
+//                    Log.d(TAG, "Start tag: "+name);
+                    if (name.equals("item")) {
+                        retrieveData = true;
+                        continue;
+                    }
+                    break;
+
+                case XmlPullParser.END_TAG:
+//                    Log.d(TAG, "End tag: "+name);
+                    if (name.equals("item")) {
+                        retrieveData = false;
+                    }
+                    continue;
+            }
+
+             if (parser.next() == XmlPullParser.TEXT) {
+//                 Log.d(TAG, "Parsing name ==> " + name);
+                 String data = parser.getText();
+                 switch (name) {
+                     case "title":
+                         title = data;
+                         break;
+                     case "link":
+                         link = data;
+                         break;
+                     case "description":
+                         description = data;
+                         break;
+                     case "pubDate":
+                         date = data;
+                         break;
+                 }
+             }
 
 
-        return "";
+            if (title != null && link != null && description != null && date != null) {
+                if (retrieveData) {
+                    News news = new News(title, link, description, date);
+                    newsList.add(news);
+                }
+
+                title = null;
+                link = null;
+                description = null;
+                date = null;
+             }
+
+         }
+
+         inputStream.close();
+         return newsList;
     }
 
-    
+
 }
