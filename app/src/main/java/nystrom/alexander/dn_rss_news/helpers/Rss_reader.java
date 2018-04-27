@@ -53,8 +53,8 @@ public class Rss_reader extends AsyncTask<Void, Void, List<News>> {
         return null;
     }
 
-    static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
-    }
+//    static String convertStreamToString(java.io.InputStream is) {
+//        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+//        return s.hasNext() ? s.next() : "";
+//    }
 }
