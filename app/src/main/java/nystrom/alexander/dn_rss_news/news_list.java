@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class news_list extends AppCompatActivity {
 
-    private String TAG = "news_list";
+    private static String TAG = "news_list";
 
 
     @Override

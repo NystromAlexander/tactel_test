@@ -11,7 +11,7 @@ import java.net.URL;
  * Created by dv15anm on 2018-04-27.
  */
 public class Rss_reader extends AsyncTask<String, Void, String> {
-    private String TAG = "Rss_reader";
+    private static String TAG = "Rss_reader";
     private String mUrl = "https://www.dn.se/nyheter/m/rss/";
 
     public Rss_reader() {
