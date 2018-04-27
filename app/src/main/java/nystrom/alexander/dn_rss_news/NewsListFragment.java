@@ -32,5 +32,9 @@ public class NewsListFragment extends Fragment{
         } catch (ExecutionException e) {
             Log.w(TAG, "Error during execution: "+e.getMessage());
         }
+
+        if (mNewsList == null) {
+            //TODO Error message toast
+        }
     }
 }
