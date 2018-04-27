@@ -1,4 +1,4 @@
-package nystrom.alexander.dn_rss_news;
+package nystrom.alexander.dn_rss_news.helpers;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -10,13 +10,12 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 
-import nystrom.alexander.dn_rss_news.helpers.News;
-import nystrom.alexander.dn_rss_news.helpers.Rss_parser;
+import nystrom.alexander.dn_rss_news.models.News;
 
 /**
  * Created by dv15anm on 2018-04-27.
  */
-public class Rss_reader extends AsyncTask<String, Void, List<News>> {
+public class Rss_reader extends AsyncTask<Void, Void, List<News>> {
     private static String TAG = "Rss_reader";
     private String mUrl = "https://www.dn.se/nyheter/m/rss/";
 
@@ -25,9 +24,10 @@ public class Rss_reader extends AsyncTask<String, Void, List<News>> {
     }
 
     @Override
-    protected List<News> doInBackground(String... strings) {
+    protected List<News> doInBackground(Void... voids) {
         return read_rss();
     }
+
 
 
     public List<News> read_rss() {
@@ -38,9 +38,9 @@ public class Rss_reader extends AsyncTask<String, Void, List<News>> {
             InputStream inputStream = url.openConnection().getInputStream();
             try {
                 List<News> newsList =  Rss_parser.parseRssStream(inputStream);
-                for (News news: newsList) {
-                    Log.d(TAG,news.getTitle()+" "+news.getDescritption()+" "+news.getNewsUrl()+" "+news.getPublished());
-                }
+//                for (News news: newsList) {
+//                    Log.d(TAG,news.getTitle()+" "+news.getDescritption()+" "+news.getNewsUrl()+" "+news.getPublished());
+//                }
                 return newsList;
             } catch (XmlPullParserException e) {
                 Log.w(TAG, "Issue parsing RSS: "+e.getMessage());

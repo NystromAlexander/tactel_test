@@ -1,6 +1,4 @@
-package nystrom.alexander.dn_rss_news.helpers;
-
-import java.util.Date;
+package nystrom.alexander.dn_rss_news.models;
 
 /**
  * Created by dv15anm on 2018-04-27.

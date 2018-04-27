@@ -1,6 +1,5 @@
 package nystrom.alexander.dn_rss_news.helpers;
 
-import android.util.Log;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -8,11 +7,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import nystrom.alexander.dn_rss_news.models.News;
 
 /**
  * Created by dv15anm on 2018-04-27.
@@ -44,7 +42,6 @@ public class Rss_parser {
 
             switch (eventType){
                 case XmlPullParser.START_TAG:
-//                    Log.d(TAG, "Start tag: "+name);
                     if (name.equals("item")) {
                         retrieveData = true;
                         continue;
@@ -52,7 +49,6 @@ public class Rss_parser {
                     break;
 
                 case XmlPullParser.END_TAG:
-//                    Log.d(TAG, "End tag: "+name);
                     if (name.equals("item")) {
                         retrieveData = false;
                     }
@@ -60,7 +56,6 @@ public class Rss_parser {
             }
 
              if (parser.next() == XmlPullParser.TEXT) {
-//                 Log.d(TAG, "Parsing name ==> " + name);
                  String data = parser.getText();
                  switch (name) {
                      case "title":
