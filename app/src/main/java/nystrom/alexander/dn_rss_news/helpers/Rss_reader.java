@@ -13,7 +13,7 @@ import java.util.List;
 import nystrom.alexander.dn_rss_news.models.News;
 
 /**
- * Created by dv15anm on 2018-04-27.
+ * Will read the DN RSS feed in a asynctask and then parse the RSS feed
  */
 public class Rss_reader extends AsyncTask<Void, Void, List<News>> {
     private static String TAG = "Rss_reader";

@@ -11,7 +11,7 @@ import nystrom.alexander.dn_rss_news.R;
 import nystrom.alexander.dn_rss_news.models.News;
 
 /**
- * Created by dv15anm on 2018-04-27.
+ * Creates the list items showing news headlines
  */
 class NewsViewHolder extends RecyclerView.ViewHolder {
 

@@ -10,7 +10,7 @@ import nystrom.alexander.dn_rss_news.R;
 import nystrom.alexander.dn_rss_news.models.News;
 
 /**
- * Created by dv15anm on 2018-04-27.
+ * Adapter used by the NewsListFragment
  */
 public class NewsRecyclerViewAdapter extends RecyclerView.Adapter<NewsViewHolder> {
     private static String TAG = "NewsRecyclerViewAdapter";

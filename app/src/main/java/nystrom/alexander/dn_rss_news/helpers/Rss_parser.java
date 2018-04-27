@@ -13,7 +13,7 @@ import java.util.List;
 import nystrom.alexander.dn_rss_news.models.News;
 
 /**
- * Created by dv15anm on 2018-04-27.
+ * Parser to find the wanted information from DN RSS feed
  */
 public class Rss_parser {
 

@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by dv15anm on 2018-04-27.
  *
  * Class to represent a news instance
  */

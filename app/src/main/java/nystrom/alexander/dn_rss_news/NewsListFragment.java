@@ -19,7 +19,7 @@ import nystrom.alexander.dn_rss_news.helpers.Rss_reader;
 import nystrom.alexander.dn_rss_news.models.News;
 
 /**
- * Created by dv15anm on 2018-04-27.
+ * Fragment displaying news headlines, this is the start view of the app
  */
 public class NewsListFragment extends Fragment{
 
