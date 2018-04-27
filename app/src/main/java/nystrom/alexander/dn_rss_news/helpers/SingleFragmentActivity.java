@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import nystrom.alexander.dn_rss_news.NewsFragment;
 import nystrom.alexander.dn_rss_news.R;
 
 /**

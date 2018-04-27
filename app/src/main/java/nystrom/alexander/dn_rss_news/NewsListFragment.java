@@ -9,8 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import nystrom.alexander.dn_rss_news.adapters.NewsRecyclerViewAdapter;
@@ -23,8 +24,8 @@ import nystrom.alexander.dn_rss_news.models.News;
 public class NewsListFragment extends Fragment{
 
     private static String TAG = "NewsListFragment";
-
-    private List<News> mNewsList;
+    private static final String SAVED_NEWS = "saved_news";
+    private ArrayList<News> mNewsList;
     private RecyclerView mNewsRecyclerView;
     private NewsRecyclerViewAdapter mAdapter;
 
@@ -35,6 +36,13 @@ public class NewsListFragment extends Fragment{
 
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            mNewsList = savedInstanceState.getParcelableArrayList(SAVED_NEWS);
+        }
+    }
 
     @Nullable
     @Override
@@ -43,7 +51,7 @@ public class NewsListFragment extends Fragment{
 
         mNewsRecyclerView = (RecyclerView) view.findViewById(R.id.news_list);
         mNewsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        updateUi();
+        getNews();
         return view;
     }
 
@@ -53,10 +61,13 @@ public class NewsListFragment extends Fragment{
         updateUi();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList(SAVED_NEWS, mNewsList);
+    }
+
     private void updateUi() {
-        if (mNewsList == null) {
-            getNews();
-        }
 
         if (mAdapter == null) {
             mAdapter = new NewsRecyclerViewAdapter(mNewsList);
@@ -70,7 +81,7 @@ public class NewsListFragment extends Fragment{
     private void getNews() {
         Rss_reader reader = new Rss_reader();
         try {
-            mNewsList = reader.execute().get();
+            mNewsList = (ArrayList<News>) reader.execute().get();
         } catch (InterruptedException e) {
             Log.w(TAG, "Task got interrupted: "+e.getMessage());
         } catch (ExecutionException e) {
@@ -79,7 +90,7 @@ public class NewsListFragment extends Fragment{
 
         if (mNewsList == null) {
             Log.w(TAG, "No news list");
-            //TODO Error message toast
+            Toast.makeText(getActivity(), "Kunde inte ladda nyheter", Toast.LENGTH_SHORT).show();
         }
     }
 }

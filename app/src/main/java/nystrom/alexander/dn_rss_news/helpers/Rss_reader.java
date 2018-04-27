@@ -32,15 +32,13 @@ public class Rss_reader extends AsyncTask<Void, Void, List<News>> {
 
     public List<News> read_rss() {
 
-        URL url = null;
+        URL url;
         try {
             url = new URL(mUrl);
             InputStream inputStream = url.openConnection().getInputStream();
             try {
                 List<News> newsList =  Rss_parser.parseRssStream(inputStream);
-//                for (News news: newsList) {
-//                    Log.d(TAG,news.getTitle()+" "+news.getDescritption()+" "+news.getNewsUrl()+" "+news.getPublished());
-//                }
+
                 return newsList;
             } catch (XmlPullParserException e) {
                 Log.w(TAG, "Issue parsing RSS: "+e.getMessage());
@@ -53,8 +51,5 @@ public class Rss_reader extends AsyncTask<Void, Void, List<News>> {
         return null;
     }
 
-//    static String convertStreamToString(java.io.InputStream is) {
-//        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-//        return s.hasNext() ? s.next() : "";
-//    }
+
 }
